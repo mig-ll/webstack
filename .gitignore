@@ -1,0 +1,7 @@
+docker/docker-compose.yml
+
+database
+www/default/phpmyadmin
+www/online-store
+nginx/sites-enabled/*
+!nginx/sites-enabled/default

@@ -1,0 +1,44 @@
+# CakePHP 3 Sample
+server {
+
+	###
+	# For default server use:
+	##
+	listen 80 default_server;
+	listen [::]:80 default_server;
+	server_name _;
+
+	root /srv/www/default;
+	index index.html index.php;
+
+	gzip on;
+	gzip_disable "msie6";
+	gzip_vary on;
+	gzip_proxied any;
+	gzip_comp_level 6;
+	gzip_buffers 16 8k;
+	gzip_http_version 1.1;
+	gzip_types text/plain text/css application/json application/javascript application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+
+	error_log   /proc/self/fd/2 warn;
+
+	client_max_body_size 128m;
+
+	location / {
+		try_files $uri $uri/ =404;
+	}
+
+	location ~ \.php$ {
+		fastcgi_split_path_info ^(.+\.php)(/.+)$;
+
+		# NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini
+		fastcgi_pass localhost:9070;
+
+		try_files $uri =404;
+
+		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+		fastcgi_index index.php;
+		include fastcgi.conf;
+	}
+
+}

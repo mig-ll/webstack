@@ -1,0 +1,18 @@
+version: '3'
+services:
+  webstack:
+    build: ./
+    image: webstack
+    container_name: webStack
+    volumes:
+      - ../database:/var/lib/mysql
+      - ../nginx/sites-enabled:/etc/nginx/sites-enabled
+      - ../www:/srv/www
+    ports:
+      - 80:80
+      - 443:443
+      - 3306:3306
+    environment:
+      - MYSQL_DATA_DIR=/var/lib/mysql
+      - MYSQL_ADMIN_PASS=admin
+      - PHPMYADMIN_VERSION=4.8.3
