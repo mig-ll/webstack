@@ -168,6 +168,9 @@ ADD config/create_mysql_admin_user.sh /docker-files/create_mysql_admin_user.sh
 
 RUN chmod 755 /docker-files/*.sh
 
+RUN apt-get update -y
+RUN apt-get install -y php-xml
+
 # Add volumes for MySQL
 VOLUME  ["/etc/mysql", "/var/lib/mysql" ]
 
